@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -27,17 +28,48 @@ earlier adventurers. The only exit is to the south."""),
 room['outside'].n_to = room['foyer']
 room['foyer'].s_to = room['outside']
 room['foyer'].n_to = room['overlook']
+room['outside'].w_to = room['treasure']
 room['foyer'].e_to = room['narrow']
 room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
-
+room['outside'].w_to = room['overlook']
+room['outside'].e_to = room['treasure']
 #
 # Main
 #
 
-# Make a new player object that is currently in the 'outside' room.
+
+test1 = True
+
+player = Player('Rambo', room['outside'])
+print("current room", room['outside'])
+
+while test1 != False:
+    moron = input("->")
+    if moron == 'n' and player.current_room.n_to is not None:
+        player.current_room = player.current_room.n_to
+        print(player.current_room)
+        # return player
+    elif moron == 's' and player.current_room.s_to is not None:
+        player.current_room = player.current_room.s_to
+        print(player.current_room)
+        # return player
+    elif moron == 'e' and player.current_room.e_to is not None:
+        player.current_room = player.current_room.e_to
+        print(player.current_room)
+        # return player
+    elif moron == 'w' and player.current_room.w_to is not None:
+        player.current_room = player.current_room.w_to
+        print(player.current_room)
+        # return player
+    elif moron == 'q':
+        print("See ya")
+        break
+    else:
+        print("I am not aware of that direction. Let's do it again")
+        
 
 # Write a loop that:
 #
